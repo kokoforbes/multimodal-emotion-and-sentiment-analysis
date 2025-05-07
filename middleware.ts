@@ -1,4 +1,6 @@
-import { auth } from "./server/auth";
+export const runtime = "nodejs";
+
+import { auth } from "./src/server/auth";
 
 export default auth((req) => {
   const isAuthenticated = !!req.auth;

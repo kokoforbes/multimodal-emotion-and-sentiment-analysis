@@ -1,12 +1,12 @@
 "use server";
 
-import { hash } from "bcryptjs";
 import { signupSchema } from "~/schemas/auth";
 import type { SignupSchema } from "~/schemas/auth";
 import { db } from "~/server/db";
 import crypto from "crypto";
 
 export async function registerUser(data: SignupSchema) {
+  const { hash } = await import("bcryptjs");
   try {
     // Server-side validation
     const result = signupSchema.safeParse(data);

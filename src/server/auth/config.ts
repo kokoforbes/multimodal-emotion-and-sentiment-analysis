@@ -3,7 +3,6 @@ import { type DefaultSession, type NextAuthConfig } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 
 import { loginSchema } from "~/schemas/auth";
-import * as bcrypt from "bcryptjs";
 
 import { db } from "~/server/db";
 
@@ -56,9 +55,10 @@ export const authConfig = {
             return null;
           }
 
-          //eslint-disable-next-line
+          const { compare } = await import("bcryptjs");
+
           const isValid =
-            user.password && (await bcrypt.compare(password, user.password)); // eslint-disable-line
+            user.password && (await compare(password, user.password));
 
           if (!isValid) {
             return null;
